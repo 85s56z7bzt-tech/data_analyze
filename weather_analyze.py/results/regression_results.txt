@@ -1,0 +1,150 @@
+模型一：基本多變量迴歸
+================================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:            ln_tourists   R-squared:                       0.073
+Model:                            OLS   Adj. R-squared:                  0.070
+Method:                 Least Squares   F-statistic:                     21.68
+Date:                Sun, 31 May 2026   Prob (F-statistic):           2.53e-28
+Time:                        03:05:32   Log-Likelihood:                -4537.4
+No. Observations:                1926   AIC:                             9091.
+Df Residuals:                    1918   BIC:                             9135.
+Df Model:                           7                                         
+Covariance Type:            nonrobust                                         
+======================================================================================
+                         coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------
+Intercept             12.1094      0.391     30.939      0.000      11.342      12.877
+C(region)[T.north]    -0.4934      0.177     -2.795      0.005      -0.840      -0.147
+C(region)[T.south]     0.3882      0.156      2.493      0.013       0.083       0.694
+C(type)[T.Outdoor]     0.2673      0.123      2.180      0.029       0.027       0.508
+rainfall               0.0012      0.000      2.955      0.003       0.000       0.002
+temperature           -0.0979      0.021     -4.695      0.000      -0.139      -0.057
+rainy_days            -0.0421      0.017     -2.529      0.012      -0.075      -0.009
+sunshine               0.0068      0.002      3.617      0.000       0.003       0.010
+==============================================================================
+Omnibus:                     1148.343   Durbin-Watson:                   0.286
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             8981.339
+Skew:                          -2.804   Prob(JB):                         0.00
+Kurtosis:                      11.971   Cond. No.                     2.07e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.07e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+模型二：交互作用迴歸 rainfall × region / rainfall × type
+================================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:            ln_tourists   R-squared:                       0.075
+Model:                            OLS   Adj. R-squared:                  0.070
+Method:                 Least Squares   F-statistic:                     15.47
+Date:                Sun, 31 May 2026   Prob (F-statistic):           5.83e-27
+Time:                        03:05:32   Log-Likelihood:                -4535.9
+No. Observations:                1926   AIC:                             9094.
+Df Residuals:                    1915   BIC:                             9155.
+Df Model:                          10                                         
+Covariance Type:            nonrobust                                         
+===============================================================================================
+                                  coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------------------
+Intercept                      12.1182      0.410     29.544      0.000      11.314      12.923
+C(region)[T.north]             -0.5487      0.260     -2.113      0.035      -1.058      -0.039
+C(region)[T.south]              0.5364      0.188      2.860      0.004       0.169       0.904
+C(type)[T.Outdoor]              0.2858      0.155      1.839      0.066      -0.019       0.591
+rainfall                        0.0019      0.001      2.585      0.010       0.000       0.003
+rainfall:C(region)[T.north]     0.0004      0.001      0.372      0.710      -0.002       0.002
+rainfall:C(region)[T.south]    -0.0008      0.001     -1.273      0.203      -0.002       0.000
+rainfall:C(type)[T.Outdoor]    -0.0002      0.001     -0.393      0.695      -0.001       0.001
+temperature                    -0.1044      0.021     -4.926      0.000      -0.146      -0.063
+rainy_days                     -0.0434      0.017     -2.592      0.010      -0.076      -0.011
+sunshine                        0.0071      0.002      3.706      0.000       0.003       0.011
+==============================================================================
+Omnibus:                     1144.796   Durbin-Watson:                   0.290
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             8902.761
+Skew:                          -2.795   Prob(JB):                         0.00
+Kurtosis:                      11.927   Cond. No.                     2.86e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.86e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+模型三：Lag 延遲效果迴歸
+================================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:            ln_tourists   R-squared:                       0.084
+Model:                            OLS   Adj. R-squared:                  0.080
+Method:                 Least Squares   F-statistic:                     19.53
+Date:                Sun, 31 May 2026   Prob (F-statistic):           1.26e-31
+Time:                        03:05:32   Log-Likelihood:                -4526.2
+No. Observations:                1926   AIC:                             9072.
+Df Residuals:                    1916   BIC:                             9128.
+Df Model:                           9                                         
+Covariance Type:            nonrobust                                         
+======================================================================================
+                         coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------
+Intercept             12.5492      0.406     30.896      0.000      11.753      13.346
+C(region)[T.north]    -0.4272      0.176     -2.424      0.015      -0.773      -0.081
+C(region)[T.south]     0.4576      0.156      2.940      0.003       0.152       0.763
+C(type)[T.Outdoor]     0.1960      0.123      1.594      0.111      -0.045       0.437
+rainfall               0.0011      0.000      2.734      0.006       0.000       0.002
+rain_lag1              0.0009      0.000      2.799      0.005       0.000       0.002
+rain_lag2              0.0009      0.000      3.009      0.003       0.000       0.001
+temperature           -0.1284      0.022     -5.909      0.000      -0.171      -0.086
+rainy_days            -0.0493      0.017     -2.900      0.004      -0.083      -0.016
+sunshine               0.0072      0.002      3.834      0.000       0.004       0.011
+==============================================================================
+Omnibus:                     1131.367   Durbin-Watson:                   0.284
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             8629.619
+Skew:                          -2.760   Prob(JB):                         0.00
+Kurtosis:                      11.779   Cond. No.                     3.09e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.09e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+模型四：門檻效果迴歸 heavy_rain
+================================================================================
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:            ln_tourists   R-squared:                       0.074
+Model:                            OLS   Adj. R-squared:                  0.069
+Method:                 Least Squares   F-statistic:                     16.92
+Date:                Sun, 31 May 2026   Prob (F-statistic):           4.03e-27
+Time:                        03:05:32   Log-Likelihood:                -4537.1
+No. Observations:                1926   AIC:                             9094.
+Df Residuals:                    1916   BIC:                             9150.
+Df Model:                           9                                         
+Covariance Type:            nonrobust                                         
+=================================================================================================
+                                    coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Intercept                        12.0968      0.397     30.499      0.000      11.319      12.875
+C(region)[T.north]               -0.4971      0.177     -2.812      0.005      -0.844      -0.150
+C(region)[T.south]                0.3834      0.156      2.459      0.014       0.078       0.689
+C(type)[T.Outdoor]                0.3182      0.140      2.274      0.023       0.044       0.593
+rainfall                          0.0011      0.001      2.259      0.024       0.000       0.002
+heavy_rain                        0.1841      0.275      0.671      0.502      -0.354       0.723
+heavy_rain:C(type)[T.Outdoor]    -0.2124      0.275     -0.772      0.440      -0.752       0.327
+temperature                      -0.0985      0.021     -4.718      0.000      -0.139      -0.058
+rainy_days                       -0.0423      0.017     -2.502      0.012      -0.075      -0.009
+sunshine                          0.0068      0.002      3.616      0.000       0.003       0.010
+==============================================================================
+Omnibus:                     1148.306   Durbin-Watson:                   0.287
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             8978.659
+Skew:                          -2.804   Prob(JB):                         0.00
+Kurtosis:                      11.969   Cond. No.                     2.11e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.11e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
